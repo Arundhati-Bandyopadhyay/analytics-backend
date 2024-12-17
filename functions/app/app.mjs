@@ -11,3 +11,15 @@ export default (request, context) => {
     })
   }
 }
+
+// router.get('/api/csv', (req, res) => {
+//   const data = [];
+//   fs.createReadStream('car_sales.csv')
+//       .pipe(csvParser())
+//       .on('data', (row) => {
+//           data.push(row);
+//         })
+//         .on('end', () => {
+//           res.json(data);
+//         });
+// });

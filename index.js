@@ -33,6 +33,7 @@ router.get("/", (req, res) => {
 });
 
 app.use("/.netlify/functions/app", router);
+app.use("/.netlify/functions/api/csv", router);
 module.exports.handler = serverless(app);
 
 // app.listen(port, () => {
