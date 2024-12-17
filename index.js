@@ -3,11 +3,12 @@ const csvParser = require('csv-parser');
 const cors = require('cors');
 const fs = require('fs');
 
-const serverless = require("serverless-http");
-const router = express.Router();
+// const serverless = require("serverless-http");
+// const router = express.Router();
 
 const app = express();
-const port = 3000; // You can change the port as needed
+// const port = 3000; // You can change the port as needed
+const port = process.env.PORT || 4000;
 const corsOptions = {
     origin: '*', // Allow requests from this origin
     methods: 'GET, POST, PUT, DELETE', // Allow these HTTP methods
@@ -16,7 +17,7 @@ const corsOptions = {
 // Use the cors middleware
 app.use(cors(corsOptions));
 
-router.get('/api/csv', (req, res) => {
+app.get('/api/csv', (req, res) => {
     const data = [];
     fs.createReadStream('car_sales.csv')
         .pipe(csvParser())
@@ -28,14 +29,14 @@ router.get('/api/csv', (req, res) => {
           });
 });
 
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("App is running..");
 });
 
-app.use("/.netlify/functions/app", router);
-app.use("/.netlify/functions/api/csv", router);
-module.exports.handler = serverless(app);
+// app.use("/.netlify/functions/app", router);
+// app.use("/.netlify/functions/api/csv", router);
+// module.exports.handler = serverless(app);
 
-// app.listen(port, () => {
-//   console.log(`Server listening on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
