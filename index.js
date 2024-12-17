@@ -15,13 +15,6 @@ const corsOptions = {
 };
 // Use the cors middleware
 app.use(cors(corsOptions));
-// fs.createReadStream('car_sales.csv')
-//     .pipe(csvParser())
-//     .on('data', (data) => {
-//       // Process the CSV data here, e.g., store it in an array
-//       console.log(data);
-//     })
-
 
 router.get('/api/csv', (req, res) => {
     const data = [];
@@ -42,6 +35,6 @@ router.get("/", (req, res) => {
 app.use("/.netlify/functions/app", router);
 module.exports.handler = serverless(app);
 
-// app.listen(port, () => {
-//   console.log(`Server listening on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
