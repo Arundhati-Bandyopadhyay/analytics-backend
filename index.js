@@ -32,7 +32,7 @@ router.get("/", (req, res) => {
   res.send("App is running..");
 });
 
-app.use("/app", router);
+app.use("/.netlify/functions/app", router);
 module.exports.handler = serverless(app);
 
 // app.listen(port, () => {
