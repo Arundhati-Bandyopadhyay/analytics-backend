@@ -37,6 +37,10 @@ app.get("/", (req, res) => {
 // app.use("/.netlify/functions/api/csv", router);
 // module.exports.handler = serverless(app);
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
+
+const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
