@@ -2,6 +2,7 @@ const express = require('express');
 const csvParser = require('csv-parser');
 const cors = require('cors');
 const fs = require('fs');
+const router = express.Router();
 
 const app = express();
 const port = 3000; // You can change the port as needed
@@ -20,7 +21,7 @@ app.use(cors(corsOptions));
 //     })
 
 
-app.get('/api/csv', (req, res) => {
+router.get('/api/csv', (req, res) => {
     const data = [];
     fs.createReadStream('car_sales.csv')
         .pipe(csvParser())
@@ -32,6 +33,13 @@ app.get('/api/csv', (req, res) => {
           });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+router.get("/", (req, res) => {
+  res.send("App is running..");
 });
+
+app.use("/.netlify/functions/app", router);
+module.exports.handler = serverless(app);
+
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
